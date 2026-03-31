@@ -1,0 +1,583 @@
+/* --- 1. CORE SYSTEM RESET --- */
+:root {
+    --black: #000000;
+    --dark-grey: #0a0a0a;
+    --gold: #D4AF37;
+    --gold-dim: rgba(212, 175, 55, 0.3);
+    --gold-glow: rgba(212, 175, 55, 0.15);
+    --glass: rgba(255, 255, 255, 0.03);
+    --border: rgba(212, 175, 55, 0.2);
+    --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--black);
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* --- 2. FLOATING BLURRY NAV --- */
+.glass-nav {
+    position: fixed;
+    top: 25px;
+    left: 5%;
+    right: 5%;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+}
+
+.nav-content {
+    width: 130%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+.logo span { color: var(--gold); }
+
+.nav-links {
+    display: flex;
+    gap: 3rem;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #888;
+    font-size: 0.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: var(--transition);
+}
+
+.nav-links a:hover { color: var(--gold); text-shadow: 0 0 10px var(--gold-glow); }
+
+.cart-btn {
+    cursor: pointer;
+    position: relative;
+    color: var(--gold);
+    transition: var(--transition);
+}
+
+.cart-btn:hover { transform: scale(1.1); }
+
+#cart-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: var(--gold);
+    color: #000;
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 50px;
+    font-weight: 800;
+}
+
+/* --- 3. ASYMMETRIC HERO SECTION --- */
+
+.hero-left {
+    width: 55%;
+    position: relative; /* Essential for z-index to work */
+    z-index: 10; /* Boost this to stay on top */
+}
+
+.hero-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 55%; /* Covers the right half */
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+
+    /* 1. THE IMAGE (Using the new confirmed working link) */
+    background-image: url('https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=1200');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* 2. THE OVERLAY (Creates the fade from black to image) */
+    mask-image: linear-gradient(to right, transparent, black 40%);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 40%);
+}
+
+/* --- CRITICAL FIX: Ensure Hero Section allows the image to show --- */
+.hero-section {
+    margin-top: 30px; /* Adjusted to fit the taller nav */
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    padding: 0 10%;
+    align-items: center;
+    position: relative;
+    background: #000; /* Pure black base */
+    overflow: hidden;
+}
+.quote-block {
+    border-left: 2px solid var(--gold);
+    padding-left: 20px;
+    margin-bottom: 2rem;
+}
+
+.quote-block p { font-style: italic; color: #888; font-size: 1.1rem; }
+.quote-block span { font-size: 0.7rem; letter-spacing: 2px; color: var(--gold); }
+
+.hero-left h1 {
+    font-family: 'Syncopate', sans-serif;
+    font-size: clamp(2rem, 5vw, 5rem);
+    line-height: 0.9;
+    margin-bottom: 1.5rem;
+}
+
+.hero-left span { color: var(--gold); }
+
+.hero-left h2 {
+    font-size: 1rem;
+    font-weight: 300;
+    color: #aaa;
+    margin-bottom: 3rem;
+    max-width: 500px;
+}
+
+/* --- 4. BUTTON ARCHITECTURE --- */
+.btn-gold-solid {
+    background: var(--gold);
+    color: #000;
+    border: 1px solid var(--gold);
+    padding: 18px 35px;
+    border-radius: 12px;
+    font-family: 'Syncopate', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-right: 1.5rem;
+}
+
+.btn-gold-solid:hover {
+    background: transparent;
+    color: var(--gold);
+    box-shadow: 0 0 20px var(--gold-dim);
+}
+
+.btn-gold-outline {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 18px 35px;
+    border-radius: 12px;
+    font-family: 'Syncopate', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-gold-outline:hover {
+    background: var(--gold-dim);
+}
+
+/* --- 5. SHOP GRID (9 CARDS) --- */
+.shop-section { padding: 100px 10%; }
+
+.section-header { text-align: center; margin-bottom: 80px; }
+.glitch-text { font-family: 'Syncopate'; font-size: 3rem; color: #fff; }
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: #080808;
+    border: 1px solid #151515;
+    padding: 25px;
+    border-radius: 25px;
+    transition: var(--transition);
+}
+
+.card:hover {
+    border-color: var(--gold);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 18px;
+    margin-bottom: 20px;
+}
+
+.card h3 { font-family: 'Syncopate'; font-size: 0.9rem; margin-bottom: 10px; color: var(--gold); }
+.card p { color: #888; font-size: 0.85rem; height: 50px; }
+
+/* --- 6. CART DRAWER --- */
+.cart-drawer {
+    position: fixed;
+    right: -450px;
+    top: 0;
+    width: 400px;
+    height: 100%;
+    background: #050505;
+    border-left: 1px solid var(--border);
+    z-index: 2000;
+    padding: 40px;
+    transition: right 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cart-drawer.active { right: 0; }
+
+.order-submit-btn {
+    width: 100%;
+    padding: 20px;
+    background: var(--gold);
+    border: none;
+    font-family: 'Syncopate';
+    font-size: 0.7rem;
+    cursor: pointer;
+    font-weight: 800;
+    border-radius: 12px;
+}
+
+/* --- 7. CONTACT FORM --- */
+.contact-section { padding: 100px 10%; display: grid; place-items: center; }
+
+.contact-card {
+    width: 100%;
+    max-width: 900px;
+    background: #080808;
+    padding: 60px;
+    border-radius: 40px;
+    border: 1px solid #111;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 20px;
+    background: #000;
+    border: 1px solid #222;
+    border-radius: 12px;
+    color: white;
+    margin-top: 10px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus, textarea:focus { border-color: var(--gold); }
+
+label { font-family: 'Syncopate'; font-size: 0.6rem; color: #555; }
+
+/* --- 8. MODAL POPUP --- */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    backdrop-filter: blur(10px);
+    display: none;
+    place-items: center;
+    z-index: 3000;
+}
+
+.modal-card {
+    background: #0a0a0a;
+    padding: 60px;
+    border: 1px solid var(--gold);
+    border-radius: 35px;
+    text-align: center;
+    position: relative;
+}
+
+.tracking-box {
+    background: #000;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    border: 1px dashed var(--gold);
+}
+
+#trackingID { color: var(--gold); font-size: 1.2rem; font-weight: 800; }
+/* --- 1. CORE SYSTEM & CUSTOM MOUSE --- */
+:root {
+    --black: #000000;
+    --gold: #D4AF37;
+    --gold-dim: rgba(212, 175, 55, 0.1);
+    --gold-glow: rgba(212, 175, 55, 0.4);
+    --border: rgba(212, 175, 55, 0.2);
+    --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    cursor: none !important; /* Critical: Hides default mouse everywhere */
+}
+
+body {
+    background-color: var(--black);
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Mouse Logic */
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 10000; /* Stays above nav and modals */
+    border-radius: 50%;
+}
+
+.cursor-outline {
+    width: 45px;
+    height: 45px;
+    border: 1px solid var(--gold);
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 50%;
+}
+
+/* --- 2. TALLER & LONGER PREMIUM NAV --- */
+.glass-nav {
+    position: fixed;
+    top: 30px; 
+    left: 2%; /* Longer reach across screen */
+    right: 2%;
+    height: 100px; /* Taller presence */
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    padding: 0 80px;
+}
+
+.nav-content {
+    width: 150%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 5px;
+    font-weight: 800;
+}
+
+.logo span { color: var(--gold); }
+
+.nav-links {
+    display: flex;
+    gap: 5rem;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1rem; /* Noticeably larger text */
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: 800;
+    font-family: 'Syncopate', sans-serif;
+    transition: var(--transition);
+}
+
+.nav-links a:hover {
+    color: var(--gold);
+    text-shadow: 0 0 20px var(--gold-glow);
+}
+
+/* --- 3. CART DRAWER & SQUARE DISMISS BUTTON --- */
+.cart-drawer {
+    position: fixed;
+    right: -500px;
+    top: 0;
+    width: 450px;
+    height: 100%;
+    background: #050505;
+    border-left: 1px solid var(--border);
+    z-index: 3000;
+    padding: 60px 40px;
+    transition: right 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cart-drawer.active { right: 0; }
+
+.close-drawer {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 55px; /* Square proportions */
+    height: 55px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 1.8rem;
+    border-radius: 10px; /* Slight rounding for high-end look */
+    cursor: none; /* Keep custom cursor */
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-drawer:hover {
+    background: var(--gold);
+    color: #000;
+    transform: rotate(90deg); /* 2026 tech interaction */
+}
+
+/* --- 4. HIGH-END ABOUT US SECTION --- */
+.about-section {
+    padding: 180px 10% 100px;
+    background: linear-gradient(to bottom, #000, #080808);
+}
+
+.about-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 120px;
+    align-items: center;
+}
+
+.about-visual img {
+    width: 100%;
+    border-radius: 50px;
+    border: 1px solid var(--border);
+    filter: grayscale(1);
+    transition: var(--transition);
+}
+
+.about-visual img:hover {
+    filter: grayscale(0);
+    border-color: var(--gold);
+    box-shadow: 0 0 50px rgba(212, 175, 55, 0.1);
+}
+
+.gold-text {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 3.5rem; /* Massive typography */
+    color: var(--gold);
+    margin-bottom: 2.5rem;
+    display: block;
+    line-height: 1.1;
+}
+
+.spec {
+    padding: 35px;
+    background: rgba(255,255,255,0.02);
+    border-left: 6px solid var(--gold);
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    transition: 0.4s ease;
+}
+
+.spec:hover {
+    background: rgba(212, 175, 55, 0.05);
+    transform: translateX(15px);
+}
+
+.spec span {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 2rem;
+    color: var(--gold);
+    font-weight: 800;
+}
+
+/* --- 5. THE 2026 FOOTER --- */
+footer {
+    padding: 120px 10% 60px;
+    background: #000;
+    border-top: 1px solid #111;
+}
+
+.footer-line {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin-bottom: 80px;
+    opacity: 0.5;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #666;
+    font-family: 'Syncopate', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+}
+
+.socials span {
+    margin-left: 40px;
+    color: #888;
+    transition: 0.3s ease;
+}
+
+.socials span:hover {
+    color: var(--gold);
+    text-shadow: 0 0 10px var(--gold-glow);
+}
+
+/* --- 6. BUTTONS RE-STYLED --- */
+.btn-gold-solid {
+    background: var(--gold);
+    color: #000;
+    border: 1px solid var(--gold);
+    padding: 22px 45px;
+    border-radius: 15px;
+    font-family: 'Syncopate', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 800;
+    transition: var(--transition);
+}
+
+.btn-gold-solid:hover {
+    background: transparent;
+    color: var(--gold);
+    box-shadow: 0 0 30px var(--gold-dim);
+}

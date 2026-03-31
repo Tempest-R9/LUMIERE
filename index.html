@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMIÈRE | Kinetic Junk & Tea</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <nav class="glass-nav">
+        <div class="nav-content">
+            <div class="logo">LUMI<span>È</span>RE</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-right">
+                <div class="cart-btn" onclick="toggleCart()">
+                    <i data-lucide="shopping-bag"></i>
+                    <span id="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="cartDrawer" class="cart-drawer">
+        <div class="drawer-header">
+            <h3>ORDER_MANIFEST</h3>
+            <button class="close-drawer" onclick="toggleCart()">&times;</button>
+        </div>
+        <div id="cartItems" class="drawer-body">
+            </div>
+        <div class="drawer-footer">
+            <div class="total-box">
+                <span>SUBTOTAL</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="order-submit-btn" onclick="openOrderModal()">INITIALIZE_ORDER</button>
+        </div>
+    </div>
+
+    <div id="orderModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-glow"></div>
+            <h2>ORDER_CONFIRMED</h2>
+            <div id="finalSummary" class="summary-list"></div>
+            <div class="payment-tag">METHOD: PAY_ON_DELIVERY</div>
+            <div class="tracking-box">
+                <small>TRACKING_ID</small>
+                <code id="trackingID">LM-000-000</code>
+            </div>
+            <button class="btn-gold-solid" onclick="closeOrderModal()">DISMISS_SYSTEM</button>
+        </div>
+    </div>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="hero-left">
+                <div class="quote-block">
+                    <p>"The code doesn't sleep, <br>so neither do we."</p>
+                    <span>— SYNCRO_DEV_2026</span>
+                </div>
+                <h3>SYSTEM_V.01</h3>
+                <h1>HIGH_CALORIE<br><span>DIGITAL_FUEL</span></h1>
+                <h2>Premium junk food for the high-ticket developer.</h2>
+                <div class="hero-btns">
+                    <button class="btn-gold-solid" onclick="document.getElementById('shop').scrollIntoView()">ORDER_NOW</button>
+                    <button class="btn-gold-outline">VIEW_RELEASES</button>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="cup-anchor"></div>
+            </div>
+        </section>
+
+        <section id="shop" class="shop-section">
+            <div class="section-header">
+                <h2 class="glitch-text" data-text="THE_CATALOGUE">THE_CATALOGUE</h2>
+                <p>9 EXCLUSIVE BIOLOGICAL UPGRADES</p>
+            </div>
+            <div id="menuGrid" class="menu-grid">
+                </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="about-container">
+                <div class="about-visual">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800" alt="Tech Kitchen">
+                </div>
+                <div class="about-text">
+                    <h2 class="gold-text">WHO_WE_ARE</h2>
+                    <p>Lumière is a 2026 gastronomic startup designed for the next generation of builders. We noticed that high-end food felt too formal, and junk food felt too cheap. We bridged the gap.</p>
+                    <div class="tech-specs">
+                        <div class="spec"><span>01</span><p>Molecular Flavor Synthesis</p></div>
+                        <div class="spec"><span>02</span><p>Hyper-Local Delivery Grids</p></div>
+                        <div class="spec"><span>03</span><p>Crypto-Incentivized Loyalty</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="contact-card">
+                <div class="form-header">
+                    <h2>SYSTEM_ENQUIRY</h2>
+                    <p>Drop a message into the void.</p>
+                </div>
+                <form id="contactForm" class="cyber-form">
+                    <div class="input-row">
+                        <div class="field">
+                            <label>USER_ID</label>
+                            <input type="text" placeholder="Full Name" required>
+                        </div>
+                        <div class="field">
+                            <label>COMM_PORT</label>
+                            <input type="email" placeholder="email@address.com" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>DATA_PACKET</label>
+                        <textarea placeholder="Write your message here..." rows="5"></textarea>
+                    </div>
+                    <button type="submit" class="btn-gold-solid full-width">TRANSMIT_DATA</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-line"></div>
+        <div class="footer-content">
+            <p>&copy; 2026 LUMIÈRE_SYSTEMS. ALL RIGHTS RESERVED.</p>
+            <div class="socials">
+                <span>INSTAGRAM</span> / <span>TWITTER</span> / <span>GITHUB</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
